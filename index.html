@@ -683,7 +683,9 @@
     
                             // Collect form data
                             const formData = new FormData(contactForm);
+                            console.log('reCAPTCHA token:', recaptchaToken);
                             formData.append('recaptchaToken', recaptchaToken);
+                            console.log('Form Dara:', formDara);
     
                             // Send to backend API
                             const response = await fetch('https://api.quantamisu.com/api/contact', {
