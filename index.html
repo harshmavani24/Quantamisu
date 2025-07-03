@@ -674,7 +674,7 @@ if (contactForm) {
         const buttonText = document.getElementById('buttonText');
         const formMessage = document.getElementById('form-message');
 
-        console.log('Form submission started');
+        console.log('Form submission started at', new Date().toISOString());
 
         // Get reCAPTCHA token
         grecaptcha.ready(async function() {
@@ -695,8 +695,8 @@ if (contactForm) {
                 console.log('Form Data:', formDataObject);
 
                 // Send to backend API
-                const backendUrl = 'https://api.quantamisu.com/api/contact'; // Update this if backend URL differs
-                console.log(`Sending request to ${backendUrl}`);
+                const backendUrl = 'https://api.quantamisu.com/api/contact'; // Update if backend URL differs
+                console.log(`Sending request to ${backendUrl} at`, new Date().toISOString());
                 const response = await fetch(backendUrl, {
                     method: 'POST',
                     body: formData,
@@ -704,10 +704,11 @@ if (contactForm) {
                         'Accept': 'application/json'
                     }
                 }).catch(error => {
-                    console.error('Fetch error:', error);
-                    throw error;
+                    console.error('Fetch error:', error.message);
+                    throw new Error(`Network error: ${error.message}`);
                 });
 
+                console.log('Response status:', response.status);
                 const result = await response.json();
                 console.log('Backend response:', result);
 
@@ -724,17 +725,17 @@ if (contactForm) {
                     formMessage.classList.remove('text-green-600');
                     formMessage.classList.add('text-red-600');
                     formMessage.textContent = result.message || 'Failed to send message. Please try again.';
+                    console.log('Response error details:', result);
                 }
             } catch (error) {
                 console.error('Frontend error:', error.message);
+                console.log('Error details:', error);
                 buttonText.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
                 submitButton.disabled = false;
                 formMessage.classList.remove('hidden');
                 formMessage.classList.remove('text-green-600');
                 formMessage.classList.add('text-red-600');
-                formMessage.textContent = 'An error occurred. Please try again.';
-                // Log additional error details
-                console.log('Error details:', error);
+                formMessage.textContent = `An error occurred: ${error.message}. Please try again.`;
             }
         });
     });
