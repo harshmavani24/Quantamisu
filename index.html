@@ -7,8 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfxzHUrAAAAAIE6HFLA8_dB6a8fX4TS2y2e7abG"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <style>
         :root {
             --cream: #E7E1DA;
@@ -61,7 +59,7 @@
         }
 
         .hero-background {
-            background-image: url('./background.png');
+            background-image: url('./imgs/background.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -71,29 +69,73 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-
+        /* Responsive Logo Sizing */
         .quantamisu-logo {
-            height: 70%;       /* clean display size */
-            width: 25%;        /* auto for aspect ratio */
+            height: 50px; /* Default for mobiles */
+            width: auto;
             object-fit: contain;
             display: block;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-left: 10%;
+            margin-left: 2%; /* Adjust for very small screens */
         }
+
+        @media (min-width: 640px) { /* sm breakpoint: Tablets/Larger Phones */
+            .quantamisu-logo {
+                height: 60px;
+                margin-left: 5%;
+            }
+        }
+
+        @media (min-width: 768px) { /* md breakpoint: Small Laptops/Mid Laptops */
+            .quantamisu-logo {
+                height: 100px;
+                margin-left: 40%;
+            }
+        }
+
+        /* Container max-width adjustment for different screens */
+        .container {
+            max-width: 100%; /* Default for smaller screens */
+            padding-left: 1rem; /* px-4 */
+            padding-right: 1rem; /* px-4 */
+        }
+
+        @media (min-width: 640px) { /* sm */
+            .container {
+                max-width: 640px;
+                padding-left: 1.5rem; /* px-6 */
+                padding-right: 1.5rem; /* px-6 */
+            }
+        }
+
+        @media (min-width: 768px) { /* md */
+            .container {
+                max-width: 768px;
+                padding-left: 2rem; /* px-8 */
+                padding-right: 2rem; /* px-8 */
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg */
+            .container {
+                max-width: 1024px;
+                padding-left: 2.5rem; /* px-10 */
+                padding-right: 2.5rem; /* px-10 */
+            }
+        }
+
+        @media (min-width: 1280px) { /* xl */
+            .container {
+                max-width: 1280px;
+                padding-left: 3rem; /* px-12 */
+                padding-right: 3rem; /* px-12 */
+            }
+        }
+
 
         .quantamisu-logo:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 80%) {
-            .quantamisu-logo {
-                height: 80%; /* slightly smaller on mobile */
-            }
-        }
-
-        .container {
-            max-width: 1280px; /* for large screens */
         }
 
         .btn-primary {
@@ -160,20 +202,17 @@
 
     <header class="bg-[#E7E1DA] shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#home" class="flex items-center space-x-3">
-                <img src="./logo2.png" alt="Quantamisu Logo" class="quantamisu-logo">
+                <img src="./imgs/logo2.webp" alt="Quantamisu Logo" class="quantamisu-logo">
             </a>
 
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden md:flex space-x-6 lg:space-x-8">
                 <a href="#home" class="text-[#3A2F2D] hover:text-[#7B5F4A] font-semibold text-base md:text-lg transition-colors duration-200">Home</a>
                 <a href="#about" class="text-[#3A2F2D] hover:text-[#7B5F4A] font-semibold text-base md:text-lg transition-colors duration-200">About Us</a>
                 <a href="#team" class="text-[#3A2F2D] hover:text-[#7B5F4A] font-semibold text-base md:text-lg transition-colors duration-200">Team</a>
                 <a href="#contact" class="text-[#3A2F2D] hover:text-[#7B5F4A] font-semibold text-base md:text-lg transition-colors duration-200">Contact</a>
             </div>
 
-            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-[#3A2F2D] focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -182,7 +221,6 @@
             </button>
         </nav>
 
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden fixed inset-0 bg-[#E7E1DA] bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-8">
             <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#3A2F2D] focus:outline-none">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,35 +238,34 @@
 
     <main>
         <section id="home" class="relative h-screen flex items-center justify-center text-center hero-background">
-            <!-- Dark overlay with gradient for depth -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70"></div>
 
-            <!-- Content Container -->
-            <div class="relative z-10 text-white px-6 md:px-12 py-8 rounded-2xl max-w-4xl mx-auto bg-black/40 backdrop-blur-md shadow-2xl border border-white/20">
+            <div class="relative z-10 text-white
+                        px-4 py-6 rounded-2xl max-w-xs mx-auto bg-black/40 backdrop-blur-md shadow-2xl border border-white/20
+                        sm:max-w-md sm:px-6 sm:py-7
+                        md:max-w-xl md:px-8 md:py-8
+                        lg:max-w-3xl lg:px-10 lg:py-8
+                        xl:max-w-4xl xl:px-12 xl:py-8">
 
-                <!-- Company Name -->
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-md leading-tight tracking-tight">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-md leading-tight tracking-tight">
                     Quantamisu Capital Services LLP.
                 </h1>
 
-                <!-- Tagline -->
-                <h2 class="text-lg sm:text-xl md:text-2xl font-medium mb-4 drop-shadow-sm tracking-wide">
+                <h2 class="text-lg sm:text-xl md:text-2xl font-medium mb-3 drop-shadow-sm tracking-wide">
                     Empowering Farmers. Disrupting Markets. Generating Alpha.
                 </h2>
 
-                <!-- Slogan -->
-                <p class="text-base sm:text-lg md:text-xl font-light italic mb-8 text-gray-200 max-w-xl mx-auto">
+                <p class="text-base sm:text-lg md:text-xl font-light italic mb-6 text-gray-200 max-w-sm mx-auto">
                     "From Soil to Signal – A Dual Engine of Growth"
                 </p>
 
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
                     <a href="#quant-fund"
-                        class="px-6 py-3 sm:px-8 sm:py-4 border border-white text-white rounded-xl font-semibold text-lg sm:text-xl shadow-lg hover:bg-white hover:text-[#7B5F4A] transition transform hover:-translate-y-1 hover:shadow-2xl flex items-center gap-2">
+                        class="px-5 py-2 sm:px-6 sm:py-3 border border-white text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:bg-white hover:text-[#7B5F4A] transition transform hover:-translate-y-1 hover:shadow-2xl flex items-center gap-2">
                         <i class="fas fa-chart-line"></i> Explore Quant-Arm
                     </a>
                     <a href="#agri-tech"
-                        class="px-6 py-3 sm:px-8 sm:py-4 border border-white text-white rounded-xl font-semibold text-lg sm:text-xl shadow-lg hover:bg-white hover:text-[#7B5F4A] transition transform hover:-translate-y-1 hover:shadow-2xl flex items-center gap-2">
+                        class="px-5 py-2 sm:px-6 sm:py-3 border border-white text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:bg-white hover:text-[#7B5F4A] transition transform hover:-translate-y-1 hover:shadow-2xl flex items-center gap-2">
                         <i class="fas fa-leaf"></i> Explore Agri-Tech
                     </a>
                 </div>
@@ -238,117 +275,122 @@
 
 
         <section id="about" class="py-20 md:py-32 fade-in-section bg-[#F8F5EE]">
-            <div class="container mx-auto px-6 max-w-7xl">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
                 <h2 class="text-4xl md:text-5xl font-bold text-center text-primary-brown mb-16">About Quantamisu Capital Services LLP</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"> <div class="space-y-6 text-lg md:text-xl leading-relaxed"> <p>
-                            At Quantamisu Capital LLP, we are pioneering a unique approach to capital generation and societal impact. Our vision is to revolutionize the way alpha is generated and agriculture is monetized by combining data-driven intelligence, scientific finance, and rural empowerment into one integrated capital engine.
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                    <div class="space-y-6 text-base md:text-lg leading-relaxed">
+                        <p>
+                            At Quantamisu Capital Services LLP, we are committed to transforming the landscape of financial services by offering a comprehensive range of capital market solutions. As trusted advisors and intermediaries, we specialize in stockbroking, underwriting, portfolio management, and a broad array of financial instruments including equities, bonds, mutual funds, derivatives, and commodities.
                         </p>
                         <p>
-                            We believe in a symbiotic relationship between financial innovation and real-world impact. Our dual-engine model allows us to generate consistent, uncorrelated alpha through advanced quantitative strategies while simultaneously uplifting India's agricultural sector, creating a truly sustainable and impactful enterprise.
+                            Our expertise spans across share and stock brokerage, dealing, underwriting, and advisory services for both public and private sector instruments, including government and semi-government securities. We also serve as promoters, sub-brokers, and remissiers—helping our clients make informed investment decisions backed by market insight and research.
                         </p>
+                        <p>
+                            Beyond traditional financial markets, our vision extends into building sustainable and inclusive investment ecosystems. We aim to bridge institutional capital with grassroots agricultural productivity—turning rural India into a viable and attractive investment destination. By integrating financial markets with innovative agri-business models, we strive to deliver true financial inclusion and contribute to rural upliftment.
+                        </p>
+                        <p>
+                            At our core, we are driven by a mission to empower investors, enable sustainable growth, and create a new asset class that reflects the potential of rural&nbsp;economies.
+                        </p>
+
                     </div>
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transform hover:scale-102 transition-transform duration-500">
-                        <img src="./combine.png" alt="Integrated Vision Image" class="w-full h-full object-cover"> <div class="absolute inset-0 bg-gradient-to-br from-primary-brown to-agri-green opacity-30"></div>
+                        <img src="./imgs/combine.webp" alt="Integrated Vision Image" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary-brown to-agri-green opacity-30"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="py-20 md:py-32 bg-gradient-to-r from-primary-brown to-agri-green text-white fade-in-section bg-[#F8F5EE]">
-            <div class="container mx-auto px-6 max-w-7xl text-center">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl text-center">
                 <h2 class="text-4xl md:text-5xl text-primary-brown font-bold mb-16">A Dual Engine of Growth: From Soil to Signal</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12"> <div class="bg-white text-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 flex flex-col items-center">
-                        <i class="fas fa-seedling text-agri-green text-6xl mb-6"></i>
-                        <h3 class="text-3xl font-semibold text-agri-green mb-4">The Rural Engine: Agri-Tech</h3>
-                        <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+                    <div class="bg-white text-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 flex flex-col items-center">
+                        <i class="fas fa-seedling text-agri-green text-5xl md:text-6xl mb-6"></i>
+                        <h3 class="text-2xl md:text-3xl font-semibold text-agri-green mb-4">The Rural Engine: Agri-Tech</h3>
+                        <p class="text-base md:text-lg mb-8 leading-relaxed">
                             Empowering India’s farmers through data, market access, and government support, ensuring better yield, income, and sustainability for a brighter agricultural future.
                         </p>
-                        <a href="#agri-tech" class="btn-secondary !text-agri-primary-brown !border-agri-primary-brown hover:!bg-agri-primary-brown hover:!text-primary-brown">Learn More about Agri-Tech <i class="fas fa-arrow-right ml-2"></i></a>
+                        <a href="#agri-tech" class="btn-secondary !text-agri-green !border-agri-green hover:!bg-agri-green hover:!text-white">Learn More about Agri-Tech <i class="fas fa-arrow-right ml-2"></i></a>
                     </div>
                     <div class="bg-white text-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 flex flex-col items-center">
-                        <i class="fas fa-chart-area text-quant-gold text-6xl mb-6"></i>
-                        <h3 class="text-3xl font-semibold text-quant-gold mb-4">The Alpha Engine: Quant Fund</h3>
-                        <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                        <i class="fas fa-chart-area text-quant-gold text-5xl md:text-6xl mb-6"></i>
+                        <h3 class="text-2xl md:text-3xl font-semibold text-quant-gold mb-4">The Alpha Engine: Quant Fund</h3>
+                        <p class="text-base md:text-lg mb-8 leading-relaxed">
                             Generating uncorrelated, consistent alpha through scientific trading, alternative data, and real-time risk systems, disrupting traditional financial markets.
                         </p>
-                        <a href="#quant-fund" class="btn-secondary !text-quant-primary-brown !border-quant-primary-brown hover:!bg-quant-primary-brown hover:!text-primary-brown">Learn More about Quant Fund <i class="fas fa-arrow-right ml-2"></i></a>
+                        <a href="#quant-fund" class="btn-secondary !text-quant-gold !border-quant-gold hover:!bg-quant-gold hover:!text-white">Learn More about Quant Fund <i class="fas fa-arrow-right ml-2"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="agri-tech" class="py-20 md:py-32 bg-[#F8F5EE] fade-in-section">
-            <div class="container mx-auto px-6 max-w-7xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center text-agri-primary-brown mb-16">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-agri-green mb-16">
                     The Rural Engine: Agri-Tech for Farmer Empowerment
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start md:items-center">
-                    
-                    <!-- Text Content -->
-                    <div class="order-2 md:order-1 space-y-10 md:space-y-12">
-                        
-                        <!-- Problems We Solve -->
+
+                    <div class="order-2 md:order-1 space-y-8 md:space-y-10">
+
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-5 flex items-center">
-                                <i class="fas fa-exclamation-triangle text-agri-primary-brown mr-3"></i>
+                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-4 flex items-center">
+                                <i class="fas fa-exclamation-triangle text-agri-green mr-3"></i>
                                 Problems We Solve:
                             </h3>
-                            <ul class="list-none text-base md:text-lg space-y-4">
+                            <ul class="list-none text-base md:text-lg space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-agri-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-check-circle text-agri-green mt-1 mr-3"></i>
                                     Farmers are unsure what to grow or how to sell it profitably.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-agri-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-check-circle text-agri-green mt-1 mr-3"></i>
                                     Middlemen distort prices, reducing farmer income significantly.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-agri-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-check-circle text-agri-green mt-1 mr-3"></i>
                                     Lack of awareness about crucial government insurance/schemes.
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Our Innovative Solution -->
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-5 flex items-center">
-                                <i class="fas fa-lightbulb text-agri-primary-brown mr-3"></i>
+                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-4 flex items-center">
+                                <i class="fas fa-lightbulb text-agri-green mr-3"></i>
                                 Our Innovative Solution:
                             </h3>
-                            <ul class="list-none text-base md:text-lg space-y-4">
+                            <ul class="list-none text-base md:text-lg space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-seedling text-agri-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-seedling text-agri-green mt-1 mr-3"></i>
                                     <strong>Crop Intelligence Platform:</strong> Data-driven recommendations for optimal crops by season, region, and real-time market trends.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-hands-helping text-agri-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-hands-helping text-agri-green mt-1 mr-3"></i>
                                     <strong>Government Facilitation:</strong> Seamless assistance with scheme onboarding & insurance applications.
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Opportunity Note -->
-                        <div class="flex items-start space-x-4">
-                            <i class="fas fa-chart-pie text-agri-primary-brown text-4xl mt-1"></i>
-                            <p class="text-base md:text-lg">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-chart-pie text-agri-green text-3xl md:text-4xl mt-1"></i>
+                            <p class="text-sm md:text-base">
                                 With over 140 million farmers in India and a $500B+ Agri market, the digital opportunity is immense. We aim to increase penetration in MSP and insurance, driving significant digital transformation and economic upliftment across rural India.
                             </p>
                         </div>
 
-                        <!-- CTA Button -->
                         <div>
-                            <a href="#contact" class="btn-primary bg-agri-primary-brown hover:bg-agri-primary-brown/90 text-lg inline-flex items-center space-x-2">
+                            <a href="#contact" class="btn-primary bg-agri-green hover:bg-agri-green/90 text-base md:text-lg inline-flex items-center space-x-2">
                                 <span>Join Our Farmer Network / Partner With Us</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Image Section with Spacing -->
                     <div class="order-1 md:order-2 relative overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 mt-8 md:mt-0">
-                        <img src="./farmer.png" alt="Agri-Tech Solutions" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-br from-agri-primary-brown to-primary-brown opacity-30"></div>
+                        <img src="./imgs/farmer.webp" alt="Agri-Tech Solutions" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-agri-green to-primary-brown opacity-30"></div>
                     </div>
                 </div>
             </div>
@@ -357,79 +399,72 @@
 
 
         <section id="quant-fund" class="py-24 md:py-40 bg-[#F8F5EE] fade-in-section">
-            <div class="container mx-auto px-6 md:px-8 max-w-7xl">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
 
-                <!-- Section Heading -->
-                <h2 class="text-4xl md:text-5xl font-bold text-center text-quant-primary-brown mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-quant-gold mb-20">
                     The Alpha Engine: Quantamisu Systematic Fund
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start md:items-center">
 
-                    <!-- Image Block -->
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500 order-1 md:order-1">
-                        <img src="./quant.jpg" alt="Quant Fund Data" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-br from-quant-primary-brown to-primary-brown opacity-30"></div>
+                        <img src="./imgs/quant.webp" alt="Quant Fund Data" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-quant-gold to-primary-brown opacity-30"></div>
                     </div>
 
-                    <!-- Text Content -->
-                    <div class="space-y-10 md:space-y-12 order-2 md:order-2">
+                    <div class="space-y-8 md:space-y-10 order-2 md:order-2">
 
-                        <!-- Mission -->
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-5 flex items-center">
-                                <i class="fas fa-bullseye text-quant-primary-brown mr-3"></i> Our Mission:
+                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-4 flex items-center">
+                                <i class="fas fa-bullseye text-quant-gold mr-3"></i> Our Mission:
                             </h3>
                             <p class="text-base md:text-lg leading-relaxed">
                                 To generate uncorrelated, consistent alpha through scientific trading, leveraging alternative data, and robust real-time risk systems.
                             </p>
                         </div>
 
-                        <!-- Problems in Traditional Finance -->
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-5 flex items-center">
-                                <i class="fas fa-question-circle text-quant-primary-brown mr-3"></i> Problems in Traditional Finance:
+                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-4 flex items-center">
+                                <i class="fas fa-question-circle text-quant-gold mr-3"></i> Problems in Traditional Finance:
                             </h3>
-                            <ul class="list-none text-base md:text-lg space-y-4">
+                            <ul class="list-none text-base md:text-lg space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-times-circle text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-times-circle text-quant-gold mt-1 mr-3"></i>
                                     Over 80% of traditional funds consistently fail to beat their benchmarks.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-times-circle text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-times-circle text-quant-gold mt-1 mr-3"></i>
                                     Markets are increasingly efficient — manual, discretionary strategies simply don’t scale.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-times-circle text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-times-circle text-quant-gold mt-1 mr-3"></i>
                                     Investors demand true alpha, unparalleled transparency, and minimal drawdown.
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Why Now is the Time -->
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-5 flex items-center">
-                                <i class="fas fa-clock text-quant-primary-brown mr-3"></i> Why Now is the Time:
+                            <h3 class="text-2xl md:text-3xl font-semibold text-primary-brown mb-4 flex items-center">
+                                <i class="fas fa-clock text-quant-gold mr-3"></i> Why Now is the Time:
                             </h3>
-                            <ul class="list-none text-base md:text-lg space-y-4">
+                            <ul class="list-none text-base md:text-lg space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-database text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-database text-quant-gold mt-1 mr-3"></i>
                                     Data Explosion: A staggering 90% of the world's data has been created in the last 5 years.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-brain text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-brain text-quant-gold mt-1 mr-3"></i>
                                     Strategy Advancements: Allowing for smarter, more adaptive, and highly efficient execution.
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-chart-line text-quant-primary-brown mt-1 mr-3"></i>
+                                    <i class="fas fa-chart-line text-quant-gold mt-1 mr-3"></i>
                                     Persistent Inefficiencies: Significant opportunities still exist, particularly in Indian & emerging digital markets.
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- CTA Button -->
                         <div>
-                            <a href="#contact" class="btn-primary bg-agri-primary-brown hover:bg-agri-primary-brown/90 text-lg inline-flex items-center space-x-2">
+                            <a href="#contact" class="btn-primary bg-quant-gold hover:bg-quant-gold/90 text-base md:text-lg inline-flex items-center space-x-2">
                                 <span>Invest with Quantamisu</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -442,40 +477,37 @@
 
 
         <section id="team" class="py-20 md:py-32 bg-[#F8F5EE] fade-in-section">
-            <div class="container mx-auto px-6 md:px-8 max-w-6xl">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
 
-                <!-- Section Heading -->
                 <h2 class="text-4xl md:text-5xl font-bold text-center text-[#8B4513] mb-16">
                     Our Visionary Founding Team
                 </h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 justify-center">
 
-                    <!-- Bhavya Card -->
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl text-center transform hover:scale-105 transition-transform duration-500 flex flex-col items-center space-y-4 md:space-y-6">
-                        <img src="https://placehold.co/180x180/F0EAE0/7B5F4A?text=B" 
-                            alt="Bhavya Punjabi" 
-                            class="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#7B5F4A] shadow-lg">
+                        <img src="https://placehold.co/180x180/F0EAE0/7B5F4A?text=B"
+                            alt="Bhavya Punjabi"
+                            class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#7B5F4A] shadow-lg">
                         <h3 class="text-xl md:text-2xl font-semibold text-[#8B4513]">
                             Bhavya Punjabi
                         </h3>
                         <p class="text-base md:text-lg text-gray-700">
-                            Co-Founder & COO
+                            Co-Founder & Fund Manager
                         </p>
                         <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-xs">
-                            A seasoned quant finance lead, multi-asset strategist, ML expert, and fund manager. Bhavya drives the core quantitative strategies with a deep understanding of market dynamics.
+                            Experienced quant finance professional and fund manager with expertise in multi-asset strategies, risk management and regulatory compliance. Bhavya blends analytical rigor with a strong compliance framework to deliver robust, scalable investment&nbsp;solutions.
                         </p>
                         <a href="https://www.linkedin.com/in/bhavya-punjabi-42230914b/" target="_blank"
                         class="text-[#8B4513] hover:underline inline-flex items-center gap-2 text-base font-medium mt-2">
-                            <i class="fab fa-linkedin"></i> LinkedIn Profile
+                            <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
 
-                    <!-- Mehul Card -->
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl text-center transform hover:scale-105 transition-transform duration-500 flex flex-col items-center space-y-4 md:space-y-6">
-                        <img src="https://placehold.co/180x180/F0EAE0/7B5F4A?text=M" 
-                            alt="Mehul Sanghani" 
-                            class="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#D4AF37] shadow-lg">
+                        <img src="https://placehold.co/180x180/F0EAE0/7B5F4A?text=M"
+                            alt="Mehul Sanghani"
+                            class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#D4AF37] shadow-lg">
                         <h3 class="text-xl md:text-2xl font-semibold text-[#8B4513]">
                             Mehul Sanghani
                         </h3>
@@ -483,11 +515,11 @@
                             Co-Founder & CEO
                         </p>
                         <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-xs">
-                            An algo trading expert, financial controller, and regulatory compliance head. Mehul ensures operational excellence and financial integrity.
+                            Passionate about empowering farmers through community building, streamlined accounting, and scalable tech infrastructure. Mehul focuses on creating inclusive systems that support sustainable growth and financial transparency across the agricultural and quant&nbsp;value&nbsp;chain.
                         </p>
                         <a href="https://www.linkedin.com/in/mehul-sanghani-b19a21191/" target="_blank"
                         class="text-[#8B4513] hover:underline inline-flex items-center gap-2 text-base font-medium mt-2">
-                            <i class="fab fa-linkedin"></i> LinkedIn Profile
+                            <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
 
@@ -497,9 +529,8 @@
 
 
         <section id="contact" class="py-20 md:py-32 bg-[#E7E1DA] fade-in-section">
-            <div class="container mx-auto px-6 md:px-8 max-w-6xl">
+            <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
 
-                <!-- Heading & Subtext -->
                 <div class="text-center mb-14 md:mb-20">
                     <h2 class="text-4xl md:text-5xl font-bold text-[#8B4513] mb-6">
                         Connect With Quantamisu
@@ -511,38 +542,32 @@
 
                 <div class="flex flex-col md:flex-row gap-10 md:gap-14 items-start justify-center">
 
-                    <!-- Contact Form -->
                     <div class="bg-white text-gray-800 p-6 md:p-8 rounded-3xl shadow-xl w-full md:w-1/2 border-t-4 border-[#8B4513] space-y-6 md:space-y-8">
                         <form id="contactForm" class="space-y-5 md:space-y-6">
-                            <!-- Name -->
                             <div>
                                 <label for="name" class="block text-left text-base md:text-lg font-medium text-[#8B4513] mb-2">Your Name</label>
                                 <input type="text" id="name" name="name" required
                                     class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#8B4513] focus:border-[#8B4513] text-base placeholder-gray-400"
                                     placeholder="Enter your full name">
                             </div>
-                            <!-- Email -->
                             <div>
                                 <label for="email" class="block text-left text-base md:text-lg font-medium text-[#8B4513] mb-2">Your Email</label>
                                 <input type="email" id="email" name="email" required
                                     class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#8B4513] focus:border-[#8B4513] text-base placeholder-gray-400"
                                     placeholder="your.email@example.com">
                             </div>
-                            <!-- Subject -->
                             <div>
                                 <label for="subject" class="block text-left text-base md:text-lg font-medium text-[#8B4513] mb-2">Subject</label>
                                 <input type="text" id="subject" name="subject" required
                                     class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#8B4513] focus:border-[#8B4513] text-base placeholder-gray-400"
                                     placeholder="e.g., Investor Inquiry, Farmer Support, Partnership">
                             </div>
-                            <!-- Message -->
                             <div>
                                 <label for="message" class="block text-left text-base md:text-lg font-medium text-[#8B4513] mb-2">Your Message</label>
                                 <textarea id="message" name="message" rows="4" required
                                     class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#8B4513] focus:border-[#8B4513] text-base placeholder-gray-400"
                                     placeholder="Tell us how we can help you or what you're interested in..."></textarea>
                             </div>
-                            <!-- Submit Button -->
                             <button id="submitButton" type="submit"
                                 class="relative overflow-hidden inline-flex items-center justify-center gap-2 text-base md:text-lg font-semibold bg-[#8B4513] text-white px-5 py-3 rounded-xl hover:bg-[#A0522D] active:scale-95 transition-transform duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#8B4513]/30">
                                 <span id="buttonText"><i class="fas fa-paper-plane"></i> Send Message</span>
@@ -551,10 +576,8 @@
                         <div id="form-message" class="mt-6 md:mt-8 text-center text-lg md:text-xl font-semibold hidden"></div>
                     </div>
 
-                    <!-- Divider (hidden on mobile) -->
                     <div class="hidden md:block w-px bg-[#8B4513] mx-6 min-h-[635px]"></div>
 
-                    <!-- Contact Details -->
                     <div class="w-full md:w-1/2 text-[#8B4513] space-y-4 md:space-y-5 text-center md:text-left">
                         <div class="text-xl md:text-2xl font-semibold">
                             Contact Details:
@@ -564,7 +587,7 @@
                             📞 <a href="tel:+919274511645" class="hover:underline transition-colors duration-200 text-[#8B4513]">+91 9274511645</a><br>
                             <a href="https://www.linkedin.com/company/quantamisu-capital-services-llp" target="_blank"
                             class="inline-flex items-center space-x-2 text-[#8B4513] hover:text-gray-600 transition-colors duration-300 transform hover:scale-110 mt-2">
-                            <span>          </span><i class="fab fa-linkedin text-2xl md:text-3xl" ></i> 
+                            <span>          </span><i class="fab fa-linkedin text-2xl md:text-3xl" ></i>
                             </a>
                         </div>
                     </div>
@@ -578,10 +601,8 @@
     <footer class="bg-[#8B4513] text-[#E7E1DA] py-8 md:py-10">
         <div class="container mx-auto px-6 md:px-8 text-center text-sm md:text-base space-y-4">
 
-            <!-- Copyright -->
             <p>&copy; 2025 Quantamisu Capital Services LLP. All rights reserved.</p>
 
-            <!-- Links -->
             <div class="space-x-5 text-[#E7E1DA]">
                 <a href="#" class="hover:underline hover:text-white transition-colors duration-200">Privacy Policy</a>
                 <a href="#" class="hover:underline hover:text-white transition-colors duration-200">Terms of Service</a>
